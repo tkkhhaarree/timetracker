@@ -283,7 +283,7 @@ def display_webstats():
     ws = db.execute("select * from webstats")
     table = []
     for w in ws:
-    	x=""
+        x=""
         for i in range(len(w)):
             x = x + str(w[i]) + "---"
         table.append(x[:-3])
