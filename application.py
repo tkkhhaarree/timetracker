@@ -282,8 +282,8 @@ def display_webstats():
     db = engine.connect()
     ws = db.execute("select * from webstats")
     table = []
-    x=""
     for w in ws:
+    	x=""
         for i in range(len(w)):
             x = x + str(w[i]) + "---"
         table.append(x[:-3])
