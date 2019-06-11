@@ -6,14 +6,14 @@ import hashlib
 from sqlalchemy import create_engine
 import datetime
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def index():
     return "hello timetracker!"
 
 
-@app.route('/login', methods=['POST'])
+@application.route('/login', methods=['POST'])
 def login():
     response = str(request.get_data().decode())
     r = response.replace("username=", "")
@@ -39,7 +39,7 @@ def url_strip(url):
     return url
 
 
-@app.route('/send_url', methods=['POST'])
+@application.route('/send_url', methods=['POST'])
 def send_url():
     resp_json = request.get_data()
     params = resp_json.decode()
@@ -103,14 +103,14 @@ def send_url():
     return jsonify({'message': 'add success!'}), 200
 
 
-@app.route('/quit_url', methods=['POST'])
+@application.route('/quit_url', methods=['POST'])
 def quit_url():
     resp_json = request.get_data()
     print("Url closed: " + resp_json.decode())
     return jsonify({'message': 'quit success!'}), 200
 
 
-@app.route('/quit_chrome', methods=['POST'])
+@application.route('/quit_chrome', methods=['POST'])
 def quit_chrome():
     resp = request.get_data().decode()
     a, session = resp.split("&session=")
@@ -158,7 +158,7 @@ def quit_chrome():
     return jsonify({"message": 'quit chrome function activated'}), 200
 
 
-@app.route('/get_session', methods=['POST'])
+@application.route('/get_session', methods=['POST'])
 def get_session():
     resp = request.get_data()
     a, init_url = resp.decode().split("&current_url=")
@@ -192,7 +192,7 @@ def get_session():
     return session, 200
 
 
-@app.route('/get_app_session', methods=['POST'])
+@application.route('/get_app_session', methods=['POST'])
 def get_app_session():
     resp = request.get_data()
     auth = resp.decode().replace("auth=", "")
@@ -210,7 +210,7 @@ def get_app_session():
     return session, 200
 
 
-@app.route('/generate_auth', methods=['POST'])
+@application.route('/generate_auth', methods=['POST'])
 def generate_auth():
     resp = request.get_data()
     u, password = resp.decode().split("&password=")
@@ -221,7 +221,7 @@ def generate_auth():
     print(token)
     return token, 200
 
-@app.route('/restore_chrome', methods=['POST'])
+@application.route('/restore_chrome', methods=['POST'])
 def restore_chrome():
     print("restore chrome: "+str(time.time()))
     resp = request.get_data().decode()
@@ -254,7 +254,7 @@ def restore_chrome():
     db.close()
     return jsonify({'message': 'chrome restore activated.'}), 200
 
-@app.route('/save_app', methods=['POST'])
+@application.route('/save_app', methods=['POST'])
 def save_app():
     resp = request.get_data().decode()
     a, s = resp.split("&session=")
@@ -275,7 +275,7 @@ def save_app():
 
     return "ok", 200
 
-@app.route('/display_webstats', methods=['POST'])
+@application.route('/display_webstats', methods=['POST'])
 def display_webstats():
     engine = create_engine('mysql://tkkhhaarree:simoncommission@timetrackerdb.ctvxzstxobqa.ap-south-1.rds.amazonaws.com:3306/timetracker')
 
