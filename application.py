@@ -261,7 +261,7 @@ def save_app():
     auth = a.replace("auth=", "")
     session, pt = s.split("&apptime=")
     process_time = ast.literal_eval(pt)
-    print("session: "+session)
+    print("session is: "+session)
     print(process_time)
     engine = create_engine('mysql://tkkhhaarree:simoncommission@timetrackerdb.ctvxzstxobqa.ap-south-1.rds.amazonaws.com:3306/timetracker')
 
