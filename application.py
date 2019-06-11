@@ -73,7 +73,7 @@ def send_url():
     for z in u_v_object:
         url_viewtime[z[0]] = int(z[1])
 
-    print("initial db prev tab: ", current_url)
+    print("initial db previous tab: ", current_url)
     print("initial db timestamp: ", url_timestamp)
     print("initial db viewtime: ", url_viewtime)
 
